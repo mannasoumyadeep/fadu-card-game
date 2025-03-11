@@ -33,9 +33,18 @@ app.use(cors());
 app.use(express.json());
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI)
+const mongoURI = process.env.MONGO_URI || 'mongodb+srv://mannasoumyadeep:M@nna2001@cluster0.6qaoe.mongodb.net/?retryWrites=true&w=majority';
+console.log('Attempting to connect to MongoDB with URI:', mongoURI.replace(/mongodb\+srv:\/\/([^:]+):[^@]+@/, 'mongodb+srv://$1:***@'));
+
+mongoose.connect(mongoURI)
   .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error('MongoDB connection error:', err));
+  .catch(err => {
+    console.error('MongoDB connection error:', err);
+    console.error('Connection details:', {
+      uri_protocol: mongoURI.split('://')[0],
+      uri_host: mongoURI.split('@')[1]?.split('/')[0] || 'undefined'
+    });
+  });
 
 // API routes
 app.use('/api/auth', authRoutes);
