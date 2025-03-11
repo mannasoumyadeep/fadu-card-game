@@ -33,7 +33,7 @@ app.use(cors());
 app.use(express.json());
 
 // Connect to MongoDB
-const mongoURI = process.env.MONGO_URI || 'mongodb+srv://mannasoumyadeep:m@nna2001@cluster0.6qaoe.mongodb.net/?retryWrites=true&w=majority';
+const mongoURI = process.env.MONGO_URI || 'mongodb+srv://faduadmin:4LFtZDw7kzhfDIGZ@cluster0.dlumj.mongodb.net/fadu-card-game?retryWrites=true&w=majority&appName=Cluster0';
 console.log('Attempting to connect to MongoDB with URI:', mongoURI.replace(/mongodb\+srv:\/\/([^:]+):[^@]+@/, 'mongodb+srv://$1:***@'));
 
 mongoose.connect(mongoURI)
